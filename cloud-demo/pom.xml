@@ -16,5 +16,13 @@
         <relativePath/>
     </parent>
 
+    <modules>
+        <module>eureka-registry</module>
+        <module>gateway</module>
+        <module>service-api</module>
+        <module>service-web</module>
+        <module>service-main</module>
+    </modules>
+
 
 </project>
