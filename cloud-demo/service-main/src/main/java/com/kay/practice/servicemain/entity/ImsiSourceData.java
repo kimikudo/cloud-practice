@@ -2,6 +2,8 @@ package com.kay.practice.servicemain.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.crab2died.annotation.ExcelField;
+import com.kay.practice.servicemain.common.DateTimeConverter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -41,7 +43,7 @@ public class ImsiSourceData {
      * 设备编号
      */
     @ApiModelProperty("设备编号")
-    //@ExcelField(title = "设备编号", order = 2)
+    @ExcelField(title = "设备编号", order = 2)
     private String deviceid;
     /**
      * imei
@@ -52,7 +54,7 @@ public class ImsiSourceData {
      * imsi
      */
     @ApiModelProperty("imsi")
-    //@ExcelField(title = "IMSI", order = 1)
+    @ExcelField(title = "IMSI", order = 1)
     private String imsi;
     /**
      * 运营商
@@ -65,8 +67,8 @@ public class ImsiSourceData {
     @ApiModelProperty("上报时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    //@ExcelField(title = "采集时间", order = 4, writeConverter = DateTimeConverter.class)
-    private Date reportTime;
+    @ExcelField(title = "采集时间", order = 3, writeConverter = DateTimeConverter.class)
+    private Long reportTime;
     /**
      * uid
      */
@@ -76,18 +78,18 @@ public class ImsiSourceData {
      * 归属地
      */
     @ApiModelProperty("归属地")
-    //@ExcelField(title = "归属地", order = 5)
+    @ExcelField(title = "归属地", order = 4)
     private String homeLocation;
     /**
      * 运营商
      */
     @ApiModelProperty("运营商")
-    //@ExcelField(title = "运营商", order = 6)
+    @ExcelField(title = "运营商", order = 5)
     private String networkOperator;
     /**
      * 网络制式
      */
     @ApiModelProperty("网络制式")
-    //@ExcelField(title = "网络制式", order = 7)
+    @ExcelField(title = "网络制式", order = 6)
     private String terminalNetworkInformation;
 }
