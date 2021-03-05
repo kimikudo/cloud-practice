@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kay.practice.servicemain.dao.police.ImsiSourceDataMapper">
+    
+    <!-- 查询最新的20条IMSI记录,测试用 -->
+    <select id="listLatestImsi" resultType="com.kay.practice.servicemain.entity.ImsiSourceData">
+        SELECT
+            i.id AS id,
+            i.entry_id AS entry_id,
+            i.deviceId AS deviceid,
+            i.imsi AS imsi,
+            i.report_time AS report_time_long,
+            i.home_location AS home_location
+        FROM
+            imsi_source_data i
+        WHERE
+            1=1
+        ORDER BY i.report_time DESC
+        LIMIT 20
+    </select>
+    
+</mapper>
