@@ -14,29 +14,34 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * 第二数据源配置
+ * 主数据源配置
  *
  * @author Kay
  * @date 2021-03-09
  */
 @Configuration
-@MapperScan(basePackages = "com.kay.practice.servicemain.dao.police", sqlSessionTemplateRef = "policeSqlSessionTemplate")
-public class PoliceDataSourceConfig {
-    @Bean(name = "policeSqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("policeDataSource") DataSource dataSource) throws Exception {
+@MapperScan(basePackages = "com.kay.practice.servicemain.dao.practice", sqlSessionTemplateRef = "practiceSqlSessionTemplate")
+public class PracticeDataSourceConfig {
+    //参考https://www.cnblogs.com/ccsert/p/12249252.html
+
+    @Bean(name = "practiceSqlSessionFactory")
+    @Primary
+    public SqlSessionFactory testSqlSessionFactory(@Qualifier("practiceDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/police/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/practice/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean(name = "policeTransactionManager")
-    public DataSourceTransactionManager testTransactionManager(@Qualifier("policeDataSource") DataSource dataSource) {
+    @Bean(name = "practiceTransactionManager")
+    @Primary
+    public DataSourceTransactionManager testTransactionManager(@Qualifier("practiceDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "policeSqlSessionTemplate")
-    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("policeSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "practiceSqlSessionTemplate")
+    @Primary
+    public SqlSessionTemplate testSqlSessionTemplate(@Qualifier("practiceSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
